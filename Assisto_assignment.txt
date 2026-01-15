@@ -1,0 +1,358 @@
+101. Array Shuffle
+
+use rand::Rng;
+
+fn main() {
+    let mut arr = [1,2,3,4,5];
+    let mut r = rand::rng();
+
+    let len = arr.len();
+
+    for i in 0..len{
+        let j = r.random_range(0..len);
+        arr.swap(i,j);
+    }
+
+    println!("{:?}",arr);
+}
+
+
+102. Array Sample
+
+use rand::Rng;
+
+fn main() {
+    let arr = [10,20,30,40,50];
+    let mut r = rand::rng();
+
+    let r_i = r.random_range(0..arr.len());
+    let r_e = arr[r_i];
+    println!("{}",r_e)
+}
+
+103. Array Max
+
+fn main(){
+    let arr = [3,7,2,9,10];
+    let mut max = arr[0];
+
+    for i in 1..arr.len(){
+        if arr[i] > max{
+            max = arr[i];
+        }
+    }
+
+    println!("{}",max);
+}
+
+104. Array Min
+
+fn main(){
+    let arr = [3,7,2,9,10];
+    let mut min = arr[0];
+
+    for i in 1..arr.len(){
+        if arr[i] < min{
+            min = arr[i];
+        }
+    }
+
+    println!("{}",min);
+}
+
+105. Array Sum
+
+fn main(){
+    let arr = [3,7,2,9,10];
+    let mut sum = 0;
+
+    for i in 0..arr.len(){
+        sum+=arr[i];
+    }
+
+    print!("{}",sum);
+}
+
+106. Array Average
+
+fn main(){
+    let arr = [3,7,2,9,10];
+    let mut sum = 0;
+
+    for i in 0..arr.len(){
+        sum+=arr[i];
+    }
+
+    let avg = sum/arr.len();
+
+    print!("{}",avg);
+}
+ 
+107. Array Median
+
+fn main(){
+    let mut arr = [3,7,2,9,10,12];
+
+    arr.sort();
+
+    let median;
+
+    if arr.len() % 2 == 1 {
+        median = arr[arr.len()/2];
+    }
+    else{
+        let mid1 = arr[arr.len()/2];
+        let mid2 = arr[arr.len()/2 - 1];
+
+        median = (mid1+mid2)/2;
+    }
+
+    print!("{}",median)
+
+}
+
+108. Array Mode
+
+fn main() {
+    let arr = [3, 7, 2, 7, 9, 2, 7, 5];
+
+    let mut mode = arr[0];
+    let mut m_c = 0;
+
+    for i in 0..arr.len() {
+        let mut c = 0;
+        for j in 0..arr.len() {
+            if arr[j] == arr[i] {
+                c += 1;
+            }
+        }
+
+        if c > m_c {
+            m_c = c;
+            mode = arr[i];
+        }
+    }
+
+    println!("{}",mode);
+}
+
+109. Array Reverse
+
+fn main() {
+    let mut arr = [1, 2, 3, 4, 5];
+    let mut i = 0;
+    let mut j = arr.len() - 1;
+
+    while i < j {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+
+        i += 1;
+        j -= 1;
+    }
+
+    println!("{:?}", arr);
+}
+
+110. Array Sort
+
+fn main() {
+    let mut arr = [7, 3, 9, 2, 5];
+
+    for i in 0..arr.len() {
+        for j in 0..arr.len() - 1 {
+            if arr[j] > arr[j + 1] {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    println!("{:?}", arr);
+}
+
+111. Array Search
+
+fn main() {
+    let arr = [7, 3, 9, 2, 5];
+    let target = 9; // element we want to search
+
+    let mut found = false;
+
+    for i in 0..arr.len() {
+        if arr[i] == target {
+            println!("Element {} found at index {}", target, i);
+            found = true;
+        }
+    }
+
+    if !found {
+        println!("Element {} not found in array", target);
+    }
+}
+
+112. Array Insert
+
+fn main() {
+    let mut arr = vec![1, 2, 3, 5]; 
+    let pos = 3;
+    let n_e = 4;
+
+    arr.push(0); 
+
+    let mut i = arr.len() - 1;
+    while i > pos {
+        arr[i] = arr[i - 1];
+        i -= 1;
+    }
+
+    arr[pos] = n_e;
+
+    println!("{:?}", arr);
+}
+
+113. Array Delete
+
+fn main() {
+    let mut arr = vec![1, 2, 3, 4, 5];
+    let pos = 2; 
+    
+    for i in pos..arr.len() - 1 {
+        arr[i] = arr[i + 1];
+    }
+
+    arr.pop(); 
+    
+    println!("{:?}", arr);
+}
+
+114. Array Merge
+
+fn main() {
+    let arr1 = [1, 2, 3];
+    let arr2 = [4, 5, 6];
+
+   
+    let mut merge = Vec::new();
+
+    
+    for i in 0..arr1.len() {
+        merge.push(arr1[i]);
+    }
+
+    for i in 0..arr2.len() {
+        merge.push(arr2[i]);
+    }
+
+    println!("{:?}", merge);
+}
+
+115. Array Split
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5, 6];
+    let pos = 3;
+
+    let mut l = Vec::new();
+    let mut r = Vec::new();
+
+    
+    for i in 0..pos {
+        l.push(arr[i]);
+    }
+
+    for i in pos..arr.len() {
+        r.push(arr[i]);
+    }
+
+    println!("{:?}", arr);
+    println!("{:?}", l);
+    println!("{:?}", r);
+}
+
+116. Array Concatenate
+
+fn main() {
+    let arr1 = [1, 2, 3];
+    let arr2 = [4, 5, 6];
+
+    let mut merge = Vec::new();
+
+    for i in 0..arr1.len() {
+        merge.push(arr1[i]);
+    }
+
+    for i in 0..arr2.len() {
+        merge.push(arr2[i]);
+    }
+
+    print!("{:?}", merge);
+}
+
+117. Array Compare
+
+fn main() {
+    let arr1 = [1, 2, 3, 4, 5];
+    let arr2 = [1, 2, 3, 4, 5];
+
+    let mut equal = true;
+
+    if arr1.len() != arr2.len() {
+        equal = false;
+    } else {
+        for i in 0..arr1.len() {
+            if arr1[i] != arr2[i] {
+                equal = false;
+                break;
+            }
+        }
+    }
+
+    if equal {
+        println!("arr1 and arr2 are equal");
+    } else {
+        println!("arr1 and arr2 are not equal");
+    }
+}
+
+118. Array Copy
+
+fn main() {
+    let  arr1 = [1, 2, 3, 4, 5];
+    let mut arr2 = [0 ; 5]; 
+    
+    for i in 0..arr1.len() {
+        arr2[i] = arr1[i];
+    }
+    
+    println!("{:?}", arr2);
+}
+
+119. Array Rotate
+
+fn main() {
+    let mut arr = vec![1, 2, 3, 4, 5];
+    let k = 2;
+    let n = arr.len();
+
+    arr.reverse();
+    arr[0..k].reverse();
+    arr[k..n].reverse();
+
+    println!("{:?}",arr);
+}
+
+120. Array Unique Element
+
+fn main() {
+    let arr = [1, 2, 3, 2, 1,5,4, 4, 3]; 
+    let mut r = 0;
+
+    for i in 0..arr.len() {
+        r ^= arr[i]; 
+    }
+
+    println!("{}", r);
+}
