@@ -21,13 +21,20 @@ fn main() {
 
 use rand::Rng;
 
-fn main() {
-    let arr = [10,20,30,40,50];
-    let mut r = rand::rng();
+use rand::Rng;
 
-    let r_i = r.random_range(0..arr.len());
-    let r_e = arr[r_i];
-    println!("{}",r_e)
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let count = 2;
+    let mut r = rand::rng();
+    let mut result = Vec::new();
+
+    for _ in 0..count {
+        let idx = r.random_range(0..arr.len());
+        result.push(arr[idx]);
+    }
+
+    println!("{:?}", result);
 }
 
 103. Array Max
@@ -136,201 +143,75 @@ fn main() {
     println!("{}",mode);
 }
 
-109. Array Reverse
+109. Array Range
 
 fn main() {
-    let mut arr = [1, 2, 3, 4, 5];
-    let mut i = 0;
-    let mut j = arr.len() - 1;
+    let start = 1;
+    let end = 5;
+    let step = 1;
 
-    while i < j {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    let mut range = Vec::new();
+    let mut i = start;
 
-        i += 1;
-        j -= 1;
+    while i <= end {
+        range.push(i);
+        i += step;
     }
 
-    println!("{:?}", arr);
+    println!("{:?}", range);
 }
 
-110. Array Sort
+110. Array Zip
 
 fn main() {
-    let mut arr = [7, 3, 9, 2, 5];
+    let arr1 = [1, 2];
+    let arr2 = ["a", "b"];
+    let mut zipped = Vec::new();
 
-    for i in 0..arr.len() {
-        for j in 0..arr.len() - 1 {
-            if arr[j] > arr[j + 1] {
-                let temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
+    let len = if arr1.len() < arr2.len() { arr1.len() } else { arr2.len() };
+
+    for i in 0..len {
+        zipped.push((arr1[i], arr2[i]));
+    }
+
+    println!("{:?}", zipped);
+}
+
+111. Array Unzip
+
+fn main() {
+    let zipped = [(1, "a"), (2, "b")];
+    let mut arr1 = Vec::new();
+    let mut arr2 = Vec::new();
+
+    for i in 0..zipped.len() {
+        arr1.push(zipped[i].0);
+        arr2.push(zipped[i].1);
+    }
+
+    println!("{:?}, {:?}", arr1, arr2);
+}
+
+112. Array Transpose
+
+fn main() {
+    let matrix = [[1, 2], [3, 4], [5, 6]];
+    let rows = matrix.len();
+    let cols = matrix[0].len();
+
+    let mut transposed = vec![vec![0; rows]; cols];
+
+    for i in 0..rows {
+        for j in 0..cols {
+            transposed[j][i] = matrix[i][j];
         }
     }
 
-    println!("{:?}", arr);
+    println!("Transposed = {:?}", transposed);
 }
 
-111. Array Search
 
-fn main() {
-    let arr = [7, 3, 9, 2, 5];
-    let target = 9; // element we want to search
-
-    let mut found = false;
-
-    for i in 0..arr.len() {
-        if arr[i] == target {
-            println!("Element {} found at index {}", target, i);
-            found = true;
-        }
-    }
-
-    if !found {
-        println!("Element {} not found in array", target);
-    }
-}
-
-112. Array Insert
-
-fn main() {
-    let mut arr = vec![1, 2, 3, 5]; 
-    let pos = 3;
-    let n_e = 4;
-
-    arr.push(0); 
-
-    let mut i = arr.len() - 1;
-    while i > pos {
-        arr[i] = arr[i - 1];
-        i -= 1;
-    }
-
-    arr[pos] = n_e;
-
-    println!("{:?}", arr);
-}
-
-113. Array Delete
-
-fn main() {
-    let mut arr = vec![1, 2, 3, 4, 5];
-    let pos = 2; 
-    
-    for i in pos..arr.len() - 1 {
-        arr[i] = arr[i + 1];
-    }
-
-    arr.pop(); 
-    
-    println!("{:?}", arr);
-}
-
-114. Array Merge
-
-fn main() {
-    let arr1 = [1, 2, 3];
-    let arr2 = [4, 5, 6];
-
-   
-    let mut merge = Vec::new();
-
-    
-    for i in 0..arr1.len() {
-        merge.push(arr1[i]);
-    }
-
-    for i in 0..arr2.len() {
-        merge.push(arr2[i]);
-    }
-
-    println!("{:?}", merge);
-}
-
-115. Array Split
-
-fn main() {
-    let arr = [1, 2, 3, 4, 5, 6];
-    let pos = 3;
-
-    let mut l = Vec::new();
-    let mut r = Vec::new();
-
-    
-    for i in 0..pos {
-        l.push(arr[i]);
-    }
-
-    for i in pos..arr.len() {
-        r.push(arr[i]);
-    }
-
-    println!("{:?}", arr);
-    println!("{:?}", l);
-    println!("{:?}", r);
-}
-
-116. Array Concatenate
-
-fn main() {
-    let arr1 = [1, 2, 3];
-    let arr2 = [4, 5, 6];
-
-    let mut merge = Vec::new();
-
-    for i in 0..arr1.len() {
-        merge.push(arr1[i]);
-    }
-
-    for i in 0..arr2.len() {
-        merge.push(arr2[i]);
-    }
-
-    print!("{:?}", merge);
-}
-
-117. Array Compare
-
-fn main() {
-    let arr1 = [1, 2, 3, 4, 5];
-    let arr2 = [1, 2, 3, 4, 5];
-
-    let mut equal = true;
-
-    if arr1.len() != arr2.len() {
-        equal = false;
-    } else {
-        for i in 0..arr1.len() {
-            if arr1[i] != arr2[i] {
-                equal = false;
-                break;
-            }
-        }
-    }
-
-    if equal {
-        println!("arr1 and arr2 are equal");
-    } else {
-        println!("arr1 and arr2 are not equal");
-    }
-}
-
-118. Array Copy
-
-fn main() {
-    let  arr1 = [1, 2, 3, 4, 5];
-    let mut arr2 = [0 ; 5]; 
-    
-    for i in 0..arr1.len() {
-        arr2[i] = arr1[i];
-    }
-    
-    println!("{:?}", arr2);
-}
-
-119. Array Rotate
+113. Array Rotate
 
 fn main() {
     let mut arr = vec![1, 2, 3, 4, 5];
@@ -344,15 +225,101 @@ fn main() {
     println!("{:?}",arr);
 }
 
-120. Array Unique Element
+114. Array Without
 
 fn main() {
-    let arr = [1, 2, 3, 2, 1,5,4, 4, 3]; 
-    let mut r = 0;
+    let arr = [1, 2, 3, 4];
+    let values = [2, 3];
+    let mut r = Vec::new();
 
     for i in 0..arr.len() {
-        r ^= arr[i]; 
+        let mut skip = false;
+
+        for j in 0..values.len() {
+            if arr[i] == values[j] {
+                skip = true;
+                break;
+            }
+        }
+
+        if !skip {
+            r.push(arr[i]);
+        }
     }
 
-    println!("{}", r);
+    println!("{:?}", r);
+}
+
+115. Array Take
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let n = 3;
+    let mut r = Vec::new();
+
+    for i in 0..n {
+        r.push(arr[i]);
+    }
+
+    println!("{:?}", r);
+}
+
+
+
+116. Array Take Right
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let n = 3;
+    let mut r = Vec::new();
+
+    for i in arr.len() - n..arr.len() {
+        r.push(arr[i]);
+    }
+
+    println!("{:?}", r);
+}
+
+117. Array Drop
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let n = 2;
+    let mut r = Vec::new();
+
+    for i in n..arr.len() {
+        r.push(arr[i]);
+    }
+
+    println!("{:?}", r);
+}
+
+118. Array Drop Right
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let n = 2;
+    let mut r = Vec::new();
+
+    for i in 0..arr.len() - n {
+        r.push(arr[i]);
+    }
+
+    println!("{:?}", r);
+}
+
+119. Array First
+
+fn main() {
+    let arr = [1, 2, 3];
+    let first = arr[0];
+    println!("{}", first);
+}
+
+120. Array Last
+
+fn main() {
+    let arr = [1, 2, 3];
+    let last = arr[arr.len() - 1];
+    println!("{}", last);
 }
